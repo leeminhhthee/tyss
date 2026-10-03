@@ -1,0 +1,1970 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Đình Quân (tyss) ❤️</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&family=Pacifico&family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --primary-color: #ff4d79;
+      --secondary-color: #ff85a2;
+      --accent-gold: #ffd166;
+      --bg-dark: #0d0614;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: radial-gradient(ellipse at bottom, #1b0728 0%, #0d0614 100%);
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      min-height: 100dvh;
+      position: relative;
+    }
+
+    /* Background Canvas for Fireworks & Stars */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Floating glowing elements */
+    .ambient-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 77, 121, 0.25) 0%, transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+      pointer-events: none;
+      animation: floatGlow 8s infinite alternate ease-in-out;
+    }
+    .glow-1 { top: 10%; left: -50px; }
+    .glow-2 { bottom: 15%; right: -50px; animation-duration: 10s; }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 40px) scale(1.2); }
+    }
+
+    /* Screen 1: Start Overlay */
+    #intro-screen {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #240a35 0%, #0d0614 100%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #intro-screen.hide {
+      opacity: 0;
+      transform: scale(1.1);
+      pointer-events: none;
+    }
+
+    .gift-box-wrapper {
+      position: relative;
+      cursor: pointer;
+      margin-bottom: 22px;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    .gift-emoji {
+      font-size: 85px;
+      filter: drop-shadow(0 0 25px rgba(255, 77, 121, 0.8));
+      display: inline-block;
+      animation: wiggle 1.2s infinite ease-in-out;
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-5deg) scale(1); }
+      50% { transform: rotate(5deg) scale(1.08); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .intro-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 30%, #ff85a2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .intro-sub {
+      font-size: 0.95rem;
+      color: #ffccd7;
+      opacity: 0.85;
+      margin-bottom: 16px;
+    }
+
+    .btn-open {
+      background: linear-gradient(135deg, #ff4d79, #ff758c);
+      color: white;
+      border: none;
+      padding: 15px 36px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(255, 77, 121, 0.5), 0 0 15px rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: pulseBtn 1.8s infinite;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    @keyframes pulseBtn {
+      0% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 77, 121, 0.5); }
+      50% { transform: scale(1.05); box-shadow: 0 12px 35px rgba(255, 77, 121, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 8px 25px rgba(255, 77, 121, 0.5); }
+    }
+
+    /* SCREEN 3: WISHES GALAXY OVERLAY */
+    #wishes-screen {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 1200;
+      background: radial-gradient(circle at center, #240a35 0%, #0d0614 85%, #000000 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96);
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #wishes-screen.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    #wishes-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wishes-ui {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .wishes-title-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 209, 102, 0.4);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      box-shadow: 0 0 15px rgba(255, 209, 102, 0.3);
+    }
+
+    .btn-close-wishes {
+      background: rgba(255, 77, 121, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Quicksand', sans-serif;
+      box-shadow: 0 4px 15px rgba(255, 77, 121, 0.5);
+    }
+
+    .wishes-bottom-tip {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      color: #ffeef2;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      pointer-events: none;
+      text-align: center;
+      white-space: nowrap;
+      animation: pulseHint 2s infinite ease-in-out;
+    }
+
+    /* Main Container */
+    #main-content {
+      position: relative;
+      z-index: 10;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px 16px 80px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    #main-content.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header Section */
+    .header-card {
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    .date-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 209, 102, 0.4);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      box-shadow: 0 0 15px rgba(255, 209, 102, 0.2);
+      margin-bottom: 14px;
+      animation: pulseBadge 3s infinite;
+    }
+
+    @keyframes pulseBadge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    .hbd-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.2rem;
+      line-height: 1.3;
+      background: linear-gradient(45deg, #ff85a2, #ffd166, #ff4d79, #fff);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 6s infinite alternate;
+      text-shadow: 0 0 30px rgba(255, 77, 121, 0.3);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .name-highlight {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nick-tag {
+      background: linear-gradient(135deg, #ff4d79, #c44569);
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(255, 77, 121, 0.4);
+    }
+
+    /* Childhood Memory Card (Polaroid Style) */
+    .memory-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 22px 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tape {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 24px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(5px);
+      border-radius: 2px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .album-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      margin-top: 4px;
+      padding: 0 4px;
+    }
+
+    .album-badge {
+      background: rgba(255, 77, 121, 0.25);
+      border: 1px solid rgba(255, 77, 121, 0.4);
+      color: #ffccd7;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 16px;
+    }
+
+    .album-counter {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      color: var(--accent-gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 12px;
+    }
+
+    .polaroid-slider-wrapper {
+      position: relative;
+      margin-top: 4px;
+    }
+
+    .polaroid-frame {
+      background: #ffffff;
+      padding: 12px 12px 18px 12px;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      transform: rotate(-1deg);
+      transition: transform 0.35s ease;
+      position: relative;
+    }
+
+    .photo-container {
+      width: 100%;
+      height: 320px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #140822;
+      cursor: zoom-in;
+    }
+
+    .photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.3s ease, transform 0.35s ease;
+    }
+
+    .photo-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #2b1055;
+      text-align: center;
+      margin-top: 12px;
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Nav buttons */
+    .album-nav-btn {
+      position: absolute;
+      top: 42%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(13, 6, 20, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 5;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .album-nav-btn:active {
+      transform: translateY(-50%) scale(0.9);
+      background: rgba(255, 77, 121, 0.85);
+    }
+
+    .album-prev { left: 4px; }
+    .album-next { right: 4px; }
+
+    /* Dots navigation */
+    .album-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .album-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .album-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold);
+    }
+
+    /* Zoom Lightbox Modal */
+    #photo-zoom-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #photo-zoom-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #photo-zoom-img {
+      max-width: 94vw;
+      max-height: 74vh;
+      object-fit: contain;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 77, 121, 0.4);
+    }
+
+    #photo-zoom-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.45rem;
+      color: var(--accent-gold);
+      margin-top: 16px;
+      text-align: center;
+      max-width: 90vw;
+    }
+
+    .zoom-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .memory-story {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: #ffeef2;
+      font-weight: 500;
+    }
+
+    /* 3 Privilege Gift Cards Section */
+    .vouchers-section {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 24px 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      position: relative;
+    }
+
+    .vouchers-header {
+      margin-bottom: 18px;
+    }
+
+    .voucher-badge {
+      display: inline-block;
+      background: rgba(255, 209, 102, 0.15);
+      border: 1px solid rgba(255, 209, 102, 0.4);
+      color: var(--accent-gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+      box-shadow: 0 0 12px rgba(255, 209, 102, 0.2);
+    }
+
+    .vouchers-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.25rem;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .vouchers-sub {
+      font-size: 0.85rem;
+      color: #ffccd7;
+      opacity: 0.9;
+    }
+
+    .vouchers-count {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.82rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 4px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 209, 102, 0.25);
+    }
+
+    .vouchers-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .voucher-card {
+      perspective: 1000px;
+      min-height: 148px;
+      cursor: pointer;
+    }
+
+    .voucher-inner {
+      position: relative;
+      width: 100%;
+      min-height: 148px;
+      height: 100%;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+      border-radius: 20px;
+    }
+
+    .voucher-card.flipped .voucher-inner {
+      transform: rotateY(180deg);
+    }
+
+    .voucher-front, .voucher-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 16px;
+      box-sizing: border-box;
+    }
+
+    .voucher-front {
+      background: linear-gradient(135deg, rgba(255, 77, 121, 0.22) 0%, rgba(255, 209, 102, 0.12) 100%);
+      border: 1.5px dashed rgba(255, 209, 102, 0.55);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 77, 121, 0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .voucher-card:active .voucher-front {
+      transform: scale(0.98);
+    }
+
+    .voucher-gift-icon {
+      font-size: 2.2rem;
+      filter: drop-shadow(0 0 10px rgba(255, 209, 102, 0.6));
+      animation: pulseGift 1.8s infinite ease-in-out;
+    }
+
+    @keyframes pulseGift {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12) rotate(4deg); }
+    }
+
+    .voucher-front-tag {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .voucher-front-tap {
+      font-size: 0.78rem;
+      color: var(--accent-gold);
+      margin-top: 4px;
+      opacity: 0.9;
+    }
+
+    .voucher-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, rgba(255, 51, 102, 0.92) 0%, rgba(180, 20, 80, 0.96) 100%);
+      border: 1.5px solid rgba(255, 209, 102, 0.7);
+      box-shadow: 0 6px 20px rgba(255, 51, 102, 0.5), inset 0 0 15px rgba(255, 209, 102, 0.25);
+      color: #fff;
+      text-align: center;
+      padding: 16px 16px;
+    }
+
+    .voucher-emoji {
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+      line-height: 1;
+    }
+
+    .voucher-back-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 6px;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
+    }
+
+    .voucher-back-desc {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: #ffffff;
+      font-weight: 600;
+      padding: 0 4px;
+    }
+
+    .vouchers-completion {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255, 209, 102, 0.15);
+      border: 1px solid rgba(255, 209, 102, 0.5);
+      color: #ffffff;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      font-weight: 600;
+      box-shadow: 0 0 18px rgba(255, 209, 102, 0.3);
+    }
+
+    /* Interactive Birthday Cake */
+    .cake-section {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 24px 16px;
+      text-align: center;
+      position: relative;
+    }
+
+    .cake-container {
+      position: relative;
+      height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .cake {
+      position: relative;
+      width: 160px;
+      height: 90px;
+      background: linear-gradient(to right, #ff758c, #ff4d79);
+      border-radius: 16px 16px 8px 8px;
+      box-shadow: 0 10px 25px rgba(255, 77, 121, 0.4), inset 0 6px 0 rgba(255,255,255,0.4);
+    }
+
+    .cake-top {
+      position: absolute;
+      top: -30px;
+      left: 20px;
+      width: 120px;
+      height: 35px;
+      background: linear-gradient(to right, #ffd166, #ffbe0b);
+      border-radius: 12px 12px 4px 4px;
+      box-shadow: inset 0 4px 0 rgba(255,255,255,0.5);
+    }
+
+    .candle {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 25px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 3px, #ff4d79 3px, #ff4d79 6px);
+      border-radius: 3px;
+    }
+
+    .flame {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(ellipse at bottom, #fff 0%, #ffd166 40%, #ff4d00 85%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      box-shadow: 0 0 20px #ffd166, 0 0 35px #ff4d00;
+      animation: flicker 0.6s infinite alternate ease-in-out;
+      transform-origin: center bottom;
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) rotate(-3deg) scale(1); }
+      100% { transform: translateX(-50%) rotate(4deg) scale(1.12); }
+    }
+
+    .cake-tip {
+      font-size: 0.85rem;
+      color: #ffccd7;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    /* Typewriter Letter Box */
+    .letter-card {
+      background: linear-gradient(145deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .letter-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.4rem;
+      color: var(--accent-gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .typewriter-content {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      color: #ffffff;
+      min-height: 100px;
+      white-space: pre-line;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      word-break: break-word;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 1.1em;
+      background: linear-gradient(to bottom, #ffd166, #ff4d79);
+      box-shadow: 0 0 8px #ff4d79, 0 0 16px #ffd166;
+      border-radius: 2px;
+      vertical-align: -1px;
+      margin-left: 3px;
+      animation: smoothBlink 0.65s infinite alternate ease-in-out;
+    }
+
+    @keyframes smoothBlink {
+      0% { opacity: 0.15; transform: scaleY(0.9); }
+      100% { opacity: 1; transform: scaleY(1.05); }
+    }
+
+    /* Floating Hearts / Quotes */
+    .quotes-marquee {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 6px 0;
+      scrollbar-width: none;
+    }
+    .quotes-marquee::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill-tag {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 77, 121, 0.35);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      color: #ffccd7;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Audio Floating Widget */
+    .music-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 900;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 77, 121, 0.35);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 77, 121, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .music-btn.playing {
+      animation: rotateDisc 4s linear infinite;
+      background: rgba(255, 77, 121, 0.7);
+    }
+
+    @keyframes rotateDisc {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Touch particle indicator */
+    .touch-heart {
+      position: fixed;
+      pointer-events: none;
+      font-size: 24px;
+      z-index: 9999;
+      transform: translate(-50%, -50%) scale(0);
+      animation: floatUpFade 1.2s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -90px) scale(1.3) rotate(15deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(-50%, -150px) scale(1.6) rotate(-15deg);
+        opacity: 0;
+      }
+    }
+
+    /* Footer message */
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SCREEN 3: WISHES GALAXY (MÀN ĐIỀU ƯỚC KHI CLICK VÀO BÁNH KEM) -->
+  <div id="wishes-screen">
+    <canvas id="wishes-canvas"></canvas>
+    <div class="wishes-ui">
+      <div class="wishes-title-pill">✨ Điều Ước Tuổi Mới • Tys ✨</div>
+      <button class="btn-close-wishes" onclick="closeWishesScreen()">
+        <span>Quay lại</span> <span>↩️</span>
+      </button>
+    </div>
+    <div class="wishes-bottom-tip">
+      💖 Cre By: leminhthe - chồng iu của tyss nè 💖
+    </div>
+  </div>
+
+  <!-- LIGHTBOX PHOTO ZOOM MODAL -->
+  <div id="photo-zoom-modal" onclick="closePhotoZoom()">
+    <div class="zoom-close-btn" onclick="closePhotoZoom()">✕</div>
+    <img id="photo-zoom-img" src="" alt="Ảnh kỷ niệm Đình Quân" onclick="event.stopPropagation()" />
+    <div id="photo-zoom-caption" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <!-- Floating Ambient Glows -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Background Fireworks/Stars Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Floating Music Toggle -->
+  <div class="music-btn" id="music-toggle" title="Bật/Tắt Nhạc">🎵</div>
+
+  <!-- Audio Player: song.mp3 (Bắt đầu từ giây 30) -->
+  <audio id="bgm" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg" />
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- SCREEN 1: INTRO SURPRISE -->
+  <div id="intro-screen">
+    <div class="gift-box-wrapper" onclick="startExperience()">
+      <div class="gift-emoji">🎁</div>
+    </div>
+    <h1 class="intro-title">Gửi Đình Quân (tys) ❤️</h1>
+    <p class="intro-sub">Một món quà bất ngờ đã sẵn sàng dành cho em...</p>
+    <button class="btn-open" onclick="startExperience()">
+      <span>Mở Món Quà Bí Mật ✨</span>
+    </button>
+  </div>
+
+  <!-- SCREEN 2: MAIN CONTINUOUS EXPERIENCE -->
+  <main id="main-content">
+    
+    <!-- Header -->
+    <header class="header-card">
+      <div class="date-badge">
+        <span>✨ 21 Tháng 10, 2008 ✨</span>
+      </div>
+      <h1 class="hbd-title">Happy Birthday!</h1>
+      <div class="name-highlight">
+        <span>Đình Quân</span>
+        <span class="nick-tag">tys ❤️</span>
+      </div>
+    </header>
+
+    <!-- Letter Section with Typewriter Effect (Được đưa lên trên cùng sau khi mở quà) -->
+    <section class="letter-card">
+      <h2 class="letter-title">
+        <span>💌</span> Gửi Em - Đình Quân (tys)...
+      </h2>
+      <div class="typewriter-content"><span id="letter-text"></span><span class="cursor" id="cursor"></span></div>
+    </section>
+
+    <!-- 12-Photo Memory Album Carousel Section -->
+    <section class="memory-card">
+      <div class="tape"></div>
+
+      <div class="album-header">
+        <div class="album-badge">📸 ALBUM KỶ NIỆM TYS</div>
+        <div class="album-counter" id="album-counter">1 / 12</div>
+      </div>
+      
+      <div class="polaroid-slider-wrapper">
+        <button class="album-nav-btn album-prev" onclick="prevAlbumPhoto(event)" title="Ảnh trước">❮</button>
+        <button class="album-nav-btn album-next" onclick="nextAlbumPhoto(event)" title="Ảnh tiếp theo">❯</button>
+
+        <div class="polaroid-frame" id="polaroid-frame">
+          <div class="photo-container" onclick="openPhotoZoom()">
+            <img id="album-current-img" src="albums/1.jpg" alt="Khoảnh khắc của tys" onerror="this.src='image.jpg'" />
+          </div>
+          <div class="photo-caption" id="album-current-caption">
+            "Cậu bé đáng yêu ngày ấy của anh ✨"
+          </div>
+        </div>
+      </div>
+
+      <!-- Dot Indicators -->
+      <div class="album-dots" id="album-dots"></div>
+
+      <div class="memory-story">
+        <p>Từ cậu bé đáng yêu sinh ngày <b>21/10/2008</b> năm nào, giờ đã trở thành em người yêu tuyệt vời và đáng yêu nhất trong lòng anh. Chạm vào ảnh để phóng to xem rõ hơn nhé 🥰</p>
+      </div>
+    </section>
+
+    <!-- 3 Privilege Gift Cards Section (Thẻ đặc quyền may mắn dành cho tys) -->
+    <section class="vouchers-section">
+      <div class="vouchers-header">
+        <div class="voucher-badge">🎟️ QUÀ TẶNG BÍ MẬT 🎟️</div>
+        <h3 class="vouchers-title">3 Thẻ Đặc Quyền Dành Cho Tys</h3>
+        <p class="vouchers-sub">Chạm vào từng thẻ bên dưới để lật mở đặc quyền của em nhé ✨</p>
+        <div class="vouchers-count" id="voucher-progress">Đã mở: 0/3 thẻ 🎁</div>
+      </div>
+
+      <div class="vouchers-grid">
+        <!-- Card 1: Làm nũng -->
+        <div class="voucher-card" onclick="flipVoucher(this, 0)">
+          <div class="voucher-inner">
+            <div class="voucher-front">
+              <div class="voucher-gift-icon">🥺</div>
+              <div class="voucher-front-tag">Thẻ Đặc Quyền #01</div>
+              <div class="voucher-front-tap">✨ Chạm để lật mở ✨</div>
+            </div>
+            <div class="voucher-back">
+              <div class="voucher-emoji">🥺</div>
+              <div class="voucher-back-title">Đặc Quyền Làm Nũng</div>
+              <div class="voucher-back-desc">Được dỗi & làm nũng chồng leminhthe cả ngày, anh phải dỗ dành ngọt ngào 100%! 💕</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Bóp chân tay -->
+        <div class="voucher-card" onclick="flipVoucher(this, 1)">
+          <div class="voucher-inner">
+            <div class="voucher-front">
+              <div class="voucher-gift-icon">💆‍♂️</div>
+              <div class="voucher-front-tag">Thẻ Đặc Quyền #02</div>
+              <div class="voucher-front-tap">✨ Chạm để lật mở ✨</div>
+            </div>
+            <div class="voucher-back">
+              <div class="voucher-emoji">✨</div>
+              <div class="voucher-back-title">Massage & Bóp Chân Tay</div>
+              <div class="voucher-back-desc">1 buổi đấm lưng, bóp chân tay & phục vụ đồ uống tận nơi do chính chồng leminhthe thực hiện.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Cam kết iu trọn đời -->
+        <div class="voucher-card" onclick="flipVoucher(this, 2)">
+          <div class="voucher-inner">
+            <div class="voucher-front">
+              <div class="voucher-gift-icon">💍</div>
+              <div class="voucher-front-tag">Thẻ Đặc Quyền #03</div>
+              <div class="voucher-front-tap">✨ Chạm để lật mở ✨</div>
+            </div>
+            <div class="voucher-back">
+              <div class="voucher-emoji">💖</div>
+              <div class="voucher-back-title">Cam Kết Yêu Trọn Đời</div>
+              <div class="voucher-back-desc">Bảo hành tình yêu trọn đời, mãi mãi yêu thương, cưng chiều và ở bên cạnh tys suốt đời suốt kiếp!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vouchers-completion" id="vouchers-complete-msg" style="display: none;">
+        🎉 Chúc mừng em đã mở khóa trọn bộ 3 đặc quyền! Tất cả thẻ này đều có giá trị vĩnh viễn dành riêng cho em bé tys của anh 🥰
+      </div>
+    </section>
+
+    <!-- Interactive Birthday Cake (Khi bấm vào sẽ mở Màn 3 ngập tràn chữ & trái tim) -->
+    <section class="cake-section" onclick="openWishesScreen()" style="cursor: pointer;">
+      <div class="cake-container">
+        <div class="cake">
+          <div class="cake-top">
+            <div class="candle">
+              <div class="flame" id="cake-flame"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family: 'Comfortaa', cursive; font-weight: 700; color: var(--accent-gold); font-size: 1.2rem;">
+        🎂 Điều ước tuổi mới cho tys của anh 🎂
+      </div>
+      <div class="cake-tip" style="color: #ffd166; font-weight: 600; margin-top: 8px;">
+        ✨ (Chạm vào đây để mở ngàn điều ước & lời chúc bí mật) ✨
+      </div>
+    </section>
+
+    <!-- Romantic Marquee Badges -->
+    <div class="quotes-marquee">
+      <div class="pill-tag">💖 Đẹp trai nhất quả đất</div>
+      <div class="pill-tag">🌟 Luôn luôn vui vẻ</div>
+      <div class="pill-tag">🚀 Tuổi mới thành công rực rỡ</div>
+      <div class="pill-tag">🥰 Mãi yêu em tys</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-note">
+      <p>Chạm vào bất kỳ đâu trên màn hình để thả tim 💖</p>
+      <p style="margin-top: 6px; font-size: 0.88rem; color: #ffd166; font-weight: 700; text-shadow: 0 0 12px rgba(255, 209, 102, 0.4);">
+        ✨ Cre By: leminhthe - chồng iu của tyss nè ❤️
+      </p>
+      <p style="margin-top: 4px; font-size: 0.78rem; opacity: 0.6;">Forever with you • 21.10.2008</p>
+    </footer>
+
+  </main>
+
+  <script>
+    // --- CANVAS BACKGROUND (STARS & FIREWORKS) ---
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    // Star particles
+    const stars = Array.from({ length: 70 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius: Math.random() * 1.5 + 0.5,
+      alpha: Math.random(),
+      speed: Math.random() * 0.02 + 0.005
+    }));
+
+    let animTime = 0;
+    function drawBackground() {
+      animTime += 0.03;
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw twinkling stars on background
+      stars.forEach(star => {
+        star.alpha += star.speed;
+        const currentAlpha = Math.abs(Math.sin(star.alpha));
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha * 0.85})`;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#ff85a2';
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawBackground);
+    }
+    drawBackground();
+
+    // --- CONTINUOUS CONFETTI & FIREWORKS ---
+    let autoConfettiTimer = null;
+
+    function launchCelebrationFireworks() {
+      const duration = 15 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 50 };
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) {
+          return clearInterval(interval);
+        }
+        const particleCount = 40 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { 
+          particleCount, 
+          origin: { x: randomInRange(0.1, 0.4), y: Math.random() - 0.2 },
+          colors: ['#ff4d79', '#ffd166', '#ffffff', '#ff85a2']
+        }));
+        confetti(Object.assign({}, defaults, { 
+          particleCount, 
+          origin: { x: randomInRange(0.6, 0.9), y: Math.random() - 0.2 },
+          colors: ['#ff4d79', '#ffd166', '#ffffff', '#ff85a2']
+        }));
+      }, 350);
+
+      // Periodic gentle confetti continuously
+      autoConfettiTimer = setInterval(() => {
+        confetti({
+          particleCount: 8,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.7 },
+          colors: ['#ff4d79', '#ffd166', '#ff85a2']
+        });
+        confetti({
+          particleCount: 8,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.7 },
+          colors: ['#ff4d79', '#ffd166', '#ff85a2']
+        });
+      }, 3000);
+    }
+
+    // --- 12-PHOTO ALBUM GALLERY LOGIC (RELATIVE PATHS CHUẨN GITHUB) ---
+    const albumData = [
+      { src: 'albums/1.jpg', caption: 'Cậu bé đáng yêu ngày ấy của anh ✨' },
+      { src: 'albums/2.jpg', caption: 'Nụ cười ngọt ngào làm tan chảy trái tim anh 🥰' },
+      { src: 'albums/3.jpg', caption: 'Góc nghiêng siêu cấp đẹp trai của tys 💖' },
+      { src: 'albums/4.jpg', caption: 'Mỗi khoảnh khắc bên em đều là một kỷ niệm đẹp 🌸' },
+      { src: 'albums/5.jpg', caption: 'Đáng yêu thế này bảo sao anh không mê cho được 🥺' },
+      { src: 'albums/6.jpg', caption: 'Em bé tys sinh ngày 21/10/2008 rạng rỡ nhất trần đời 🌟' },
+      { src: 'albums/7.jpg', caption: 'Dù ở đâu thì tys vẫn là số 1 trong lòng anh 👑' },
+      { src: 'albums/8.jpg', caption: 'Ánh mắt trong veo & nụ cười tỏa nắng ☀️' },
+      { src: 'albums/9.jpg', caption: 'Cảm ơn em vì đã luôn đồng hành cùng anh 🍃' },
+      { src: 'albums/10.jpg', caption: 'Mãi luôn là cục cưng được anh cưng chiều nhất 😘' },
+      { src: 'albums/11.jpg', caption: 'Càng lớn lại càng thương em nhiều hơn ❤️' },
+      { src: 'albums/12.jpg', caption: 'Chúc em tuổi mới luôn hạnh phúc trọn vẹn bên anh 🎂💍' }
+    ];
+
+    let currentAlbumIdx = 0;
+
+    function renderAlbumDots() {
+      const dotsContainer = document.getElementById('album-dots');
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      albumData.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `album-dot ${idx === currentAlbumIdx ? 'active' : ''}`;
+        dot.onclick = (e) => {
+          e.stopPropagation();
+          showAlbumPhoto(idx);
+        };
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    function showAlbumPhoto(idx) {
+      if (idx < 0) idx = albumData.length - 1;
+      if (idx >= albumData.length) idx = 0;
+      currentAlbumIdx = idx;
+
+      const imgEl = document.getElementById('album-current-img');
+      const captionEl = document.getElementById('album-current-caption');
+      const counterEl = document.getElementById('album-counter');
+
+      if (imgEl) {
+        imgEl.style.opacity = '0.2';
+        imgEl.style.transform = 'scale(0.96)';
+        setTimeout(() => {
+          imgEl.src = albumData[currentAlbumIdx].src;
+          imgEl.style.opacity = '1';
+          imgEl.style.transform = 'scale(1)';
+        }, 180);
+      }
+
+      if (captionEl) {
+        captionEl.style.opacity = '0';
+        setTimeout(() => {
+          captionEl.textContent = `"${albumData[currentAlbumIdx].caption}"`;
+          captionEl.style.opacity = '1';
+        }, 180);
+      }
+
+      if (counterEl) {
+        counterEl.textContent = `${currentAlbumIdx + 1} / ${albumData.length}`;
+      }
+
+      const dots = document.querySelectorAll('.album-dot');
+      dots.forEach((dot, dIdx) => {
+        dot.classList.toggle('active', dIdx === currentAlbumIdx);
+      });
+    }
+
+    function prevAlbumPhoto(e) {
+      if (e) e.stopPropagation();
+      showAlbumPhoto(currentAlbumIdx - 1);
+    }
+
+    function nextAlbumPhoto(e) {
+      if (e) e.stopPropagation();
+      showAlbumPhoto(currentAlbumIdx + 1);
+    }
+
+    // Touch swipe gesture cho album
+    let albumTouchStartX = 0;
+    setTimeout(() => {
+      const polaroidFrame = document.getElementById('polaroid-frame');
+      if (polaroidFrame) {
+        polaroidFrame.addEventListener('touchstart', (e) => {
+          albumTouchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        polaroidFrame.addEventListener('touchend', (e) => {
+          const diffX = e.changedTouches[0].clientX - albumTouchStartX;
+          if (Math.abs(diffX) > 40) {
+            if (diffX > 0) prevAlbumPhoto();
+            else nextAlbumPhoto();
+          }
+        }, { passive: true });
+      }
+    }, 500);
+
+    // Lightbox Zoom Functions
+    function openPhotoZoom() {
+      const modal = document.getElementById('photo-zoom-modal');
+      const zoomImg = document.getElementById('photo-zoom-img');
+      const zoomCaption = document.getElementById('photo-zoom-caption');
+      if (modal && zoomImg) {
+        zoomImg.src = albumData[currentAlbumIdx].src;
+        if (zoomCaption) zoomCaption.textContent = albumData[currentAlbumIdx].caption;
+        modal.classList.add('show');
+      }
+    }
+
+    function closePhotoZoom() {
+      const modal = document.getElementById('photo-zoom-modal');
+      if (modal) modal.classList.remove('show');
+    }
+
+    // Render dots on start
+    renderAlbumDots();
+
+    // --- VOUCHER FLIP LOGIC (LẬT MỞ THẺ ĐẶC QUYỀN) ---
+    const openedVouchers = new Set();
+    function flipVoucher(element, idx) {
+      if (!element.classList.contains('flipped')) {
+        element.classList.add('flipped');
+        openedVouchers.add(idx);
+
+        // Pháo hoa mini khi lật thẻ
+        const rect = element.getBoundingClientRect();
+        confetti({
+          particleCount: 28,
+          spread: 60,
+          origin: {
+            x: (rect.left + rect.width / 2) / window.innerWidth,
+            y: (rect.top + rect.height / 2) / window.innerHeight
+          },
+          colors: ['#ffd166', '#ff4d79', '#ffffff', '#ff85a2']
+        });
+
+        // Cập nhật số lượng đã mở
+        const progress = document.getElementById('voucher-progress');
+        if (progress) {
+          progress.textContent = `Đã mở: ${openedVouchers.size}/3 thẻ ✨`;
+        }
+
+        // Khi mở đủ 3 thẻ -> Bắn pháo hoa rực rỡ và hiện thông báo
+        if (openedVouchers.size === 3) {
+          const completeMsg = document.getElementById('vouchers-complete-msg');
+          if (completeMsg) {
+            completeMsg.style.display = 'block';
+          }
+          setTimeout(() => {
+            confetti({
+              particleCount: 75,
+              spread: 90,
+              origin: { y: 0.6 },
+              colors: ['#ffd166', '#ff4d79', '#ff3366', '#ffffff']
+            });
+          }, 300);
+        }
+      }
+    }
+
+    // --- CAKE INTERACTION ---
+    function triggerCakeConfetti() {
+      confetti({
+        particleCount: 60,
+        spread: 80,
+        origin: { y: 0.65 },
+        colors: ['#ffd166', '#ff4d79', '#ffffff', '#ff9a9e']
+      });
+      // Play a little bounce on cake flame
+      const flame = document.getElementById('cake-flame');
+      flame.style.transform = 'translateX(-50%) scale(1.6)';
+      setTimeout(() => {
+        flame.style.transform = '';
+      }, 500);
+    }
+
+    // --- TYPEWRITER EFFECT (Mượt mà với con trỏ chuyển động) ---
+    const letterParagraphs = 
+`Chúc mừng sinh nhật em người yêu đặc biệt nhất của anh — Đình Quân (tys)! 🎉✨
+
+Hôm nay là một ngày vô cùng ý nghĩa — ngày 21/10/2008, một người tuyệt vời đã đến với thế giới này và giờ đây trở thành một phần không thể thiếu trong cuộc sống của anh.
+
+Tuổi mới, anh chúc tys luôn ngập tràn niềm vui, nụ cười luôn rạng rỡ trên môi, học tập và mọi dự định sắp tới đều đạt kết quả xuất sắc nhất!
+
+Cảm ơn em vì đã luôn ấm áp, đáng yêu và mang đến cho anh thật nhiều khoảnh khắc hạnh phúc. Hãy cùng nhau đón thêm thật nhiều mùa sinh nhật nữa nhé! ❤️🎂
+
+— Cre By: leminhthe (chồng iu của tyss nè) 🥰`;
+
+    let charIndex = 0;
+    function startTypewriter() {
+      const container = document.getElementById('letter-text');
+      const cursor = document.getElementById('cursor');
+      if (!container || !cursor) return;
+
+      container.textContent = '';
+      charIndex = 0;
+
+      function typeChar() {
+        if (charIndex < letterParagraphs.length) {
+          const char = letterParagraphs.charAt(charIndex);
+          container.textContent += char;
+          charIndex++;
+
+          // Tốc độ nhịp nhàng, mượt mà và dễ theo dõi
+          let delay = 22;
+          if (char === '.' || char === '!' || char === '?') delay = 120;
+          else if (char === ',' || char === '—') delay = 70;
+          else if (char === '\n') delay = 90;
+
+          setTimeout(typeChar, delay);
+        } else {
+          cursor.style.animation = 'smoothBlink 0.9s infinite alternate ease-in-out';
+        }
+      }
+      typeChar();
+    }
+
+    // --- MUSIC CONTROLS (Bắt đầu từ giây thứ 30) ---
+    const bgm = document.getElementById('bgm');
+    const musicToggle = document.getElementById('music-toggle');
+    let isPlaying = false;
+    let hasSetStart = false;
+
+    function ensureSecond30() {
+      if (!hasSetStart) {
+        try {
+          bgm.currentTime = 30;
+          hasSetStart = true;
+        } catch (e) {
+          console.log("Setting currentTime error", e);
+        }
+      }
+    }
+
+    bgm.addEventListener('loadedmetadata', ensureSecond30);
+    bgm.addEventListener('canplay', ensureSecond30);
+
+    function playAudio() {
+      ensureSecond30();
+      bgm.play().then(() => {
+        isPlaying = true;
+        musicToggle.classList.add('playing');
+        musicToggle.textContent = '🎵';
+      }).catch(err => {
+        console.log("Audio autoplay prevented, waiting for user gesture.", err);
+      });
+    }
+
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (isPlaying) {
+        bgm.pause();
+        musicToggle.classList.remove('playing');
+        musicToggle.textContent = '🔇';
+        isPlaying = false;
+      } else {
+        playAudio();
+      }
+    });
+
+    // --- START EXPERIENCE ON BUTTON CLICK ---
+    function startExperience() {
+      const intro = document.getElementById('intro-screen');
+      const main = document.getElementById('main-content');
+
+      intro.classList.add('hide');
+      main.classList.add('show');
+
+      // Kích hoạt dòng chữ & trái tim bay liên tục khắp màn hình
+      isGiftOpened = true;
+
+      // Bắt đầu phát nhạc từ giây 30
+      playAudio();
+
+      // Pháo hoa chào mừng
+      launchCelebrationFireworks();
+
+      // Bắt đầu gõ thư nhanh và mượt mà ngay trên đầu màn hình chính
+      setTimeout(startTypewriter, 300);
+    }
+
+    // --- CONTINUOUS TOUCH BURST OF HEARTS ---
+    const heartEmojis = ['💖', '❤️', '✨', '🎂', '🎉', '💕', '🥰', '🌸'];
+    
+    function createTouchParticle(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'touch-heart';
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = `${x}px`;
+      heart.style.top = `${y}px`;
+      heart.style.fontSize = `${Math.floor(Math.random() * 16 + 20)}px`;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 1200);
+    }
+
+    // --- GLOBAL TOUCH HEART BURST ---
+    window.addEventListener('pointerdown', (e) => {
+      // Don't trigger if clicked on controls
+      if (e.target.closest('#music-toggle') || e.target.closest('.btn-open') || e.target.closest('.btn-close-wishes')) return;
+      createTouchParticle(e.clientX, e.clientY);
+    });
+
+    // --- SCREEN 3: HIGH-PERFORMANCE 3D LOVE UNIVERSE ENGINE (60 FPS ZERO LAG) ---
+    const wishesScreen = document.getElementById('wishes-screen');
+    const wishesCanvas = document.getElementById('wishes-canvas');
+    const wishesCtx = wishesCanvas ? wishesCanvas.getContext('2d') : null;
+    let isWishesActive = false;
+    let wishesAnimId = null;
+
+    let wW = window.innerWidth, wH = window.innerHeight;
+    function resizeWishesCanvas() {
+      if (!wishesCanvas) return;
+      wW = wishesCanvas.width = window.innerWidth;
+      wH = wishesCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeWishesCanvas);
+
+    // 1. Offscreen Sprite Cache Generator (Tránh tính toán shadowBlur trong loop để đạt 60fps)
+    function createTextSprite(text, color, isBold, fontSize = 24) {
+      const off = document.createElement('canvas');
+      const octx = off.getContext('2d');
+      const fontStr = `${isBold ? 'bold' : '600'} ${fontSize}px 'Comfortaa', 'Quicksand', cursive, sans-serif`;
+      octx.font = fontStr;
+      const metrics = octx.measureText(text);
+      const textWidth = Math.ceil(metrics.width);
+      const textHeight = Math.ceil(fontSize * 1.5);
+      const pad = 24;
+
+      off.width = textWidth + pad * 2;
+      off.height = textHeight + pad * 2;
+
+      octx.font = fontStr;
+      octx.textAlign = 'center';
+      octx.textBaseline = 'middle';
+
+      const cx = off.width / 2;
+      const cy = off.height / 2;
+
+      // Glow pass 1 (Glow rộng)
+      octx.shadowColor = color;
+      octx.shadowBlur = 16;
+      octx.fillStyle = color;
+      octx.fillText(text, cx, cy);
+
+      // Glow pass 2 (Sáng rực rỡ)
+      octx.shadowBlur = 6;
+      octx.fillStyle = '#ffffff';
+      octx.fillText(text, cx, cy);
+
+      // Sharp pass
+      octx.shadowBlur = 0;
+      octx.fillStyle = color;
+      octx.fillText(text, cx, cy);
+
+      return { canvas: off, width: off.width, height: off.height, scaleBase: 1 };
+    }
+
+    function createHeartSprite(size = 34) {
+      const off = document.createElement('canvas');
+      const octx = off.getContext('2d');
+      const pad = 20;
+      off.width = size + pad * 2;
+      off.height = size + pad * 2;
+
+      const cx = off.width / 2;
+      const cy = off.height / 2;
+      const s = size / 32;
+
+      octx.shadowColor = '#ff1e42';
+      octx.shadowBlur = 18;
+      octx.fillStyle = '#ff1e42';
+
+      octx.save();
+      octx.translate(cx, cy);
+      octx.beginPath();
+      octx.moveTo(0, 10 * s);
+      octx.bezierCurveTo(-15 * s, -5 * s, -18 * s, -18 * s, 0, -10 * s);
+      octx.bezierCurveTo(18 * s, -18 * s, 15 * s, -5 * s, 0, 10 * s);
+      octx.fill();
+
+      // Highlight core
+      octx.shadowBlur = 4;
+      octx.fillStyle = '#ff85a2';
+      octx.beginPath();
+      octx.moveTo(0, 8 * s);
+      octx.bezierCurveTo(-10 * s, -4 * s, -12 * s, -14 * s, 0, -8 * s);
+      octx.bezierCurveTo(12 * s, -14 * s, 10 * s, -4 * s, 0, 8 * s);
+      octx.fill();
+      octx.restore();
+
+      return { canvas: off, width: off.width, height: off.height, scaleBase: 1 };
+    }
+
+    function createStarSprite(size = 28) {
+      const off = document.createElement('canvas');
+      const octx = off.getContext('2d');
+      const pad = 16;
+      off.width = size + pad * 2;
+      off.height = size + pad * 2;
+
+      const cx = off.width / 2;
+      const cy = off.height / 2;
+
+      octx.shadowColor = '#ffd166';
+      octx.shadowBlur = 14;
+      octx.strokeStyle = '#ffd166';
+      octx.lineWidth = 2.5;
+
+      octx.beginPath();
+      const spikes = 5;
+      const outerRadius = size / 2;
+      const innerRadius = size / 4;
+      let rot = (Math.PI / 2) * 3;
+      let x = cx;
+      let y = cy;
+      const step = Math.PI / spikes;
+
+      octx.moveTo(cx, cy - outerRadius);
+      for (let i = 0; i < spikes; i++) {
+        x = cx + Math.cos(rot) * outerRadius;
+        y = cy + Math.sin(rot) * outerRadius;
+        octx.lineTo(x, y);
+        rot += step;
+        x = cx + Math.cos(rot) * innerRadius;
+        y = cy + Math.sin(rot) * innerRadius;
+        octx.lineTo(x, y);
+        rot += step;
+      }
+      octx.lineTo(cx, cy - outerRadius);
+      octx.closePath();
+      octx.stroke();
+
+      return { canvas: off, width: off.width, height: off.height, scaleBase: 1 };
+    }
+
+    function createMoonSprite(size = 30) {
+      const off = document.createElement('canvas');
+      const octx = off.getContext('2d');
+      const pad = 16;
+      off.width = size + pad * 2;
+      off.height = size + pad * 2;
+
+      const cx = off.width / 2;
+      const cy = off.height / 2;
+
+      octx.shadowColor = '#ff758c';
+      octx.shadowBlur = 14;
+      octx.strokeStyle = '#ff758c';
+      octx.lineWidth = 2.5;
+
+      octx.beginPath();
+      octx.arc(cx, cy, size / 2, -Math.PI / 2, Math.PI / 2, false);
+      octx.quadraticCurveTo(cx + size * 0.15, cy, cx, cy - size / 2);
+      octx.stroke();
+
+      return { canvas: off, width: off.width, height: off.height, scaleBase: 1 };
+    }
+
+    // Danh sách lời chúc & câu chữ yêu thương
+    const rawWordDefinitions = [
+      { text: 'Đình Quân ❤️', color: '#ff3366', isBold: true, size: 28 },
+      { text: 'tyss ✨', color: '#ffd166', isBold: true, size: 26 },
+      { text: 'Anh yêu em nhiều lắm! 💕', color: '#ff4d88', isBold: true, size: 24 },
+      { text: 'Happy Birthday 🎂', color: '#ffd166', isBold: true, size: 24 },
+      { text: '21/10/2008 🌟', color: '#ffffff', isBold: true, size: 23 },
+      { text: 'Cre By: leminhthe 💍', color: '#ffd166', isBold: true, size: 24 },
+      { text: 'Chồng iu của tyss nè 🥰', color: '#ff3366', isBold: true, size: 24 },
+      { text: 'Mãi yêu em 💖', color: '#ff758c', isBold: true, size: 24 },
+      { text: 'Em bé của anh 🥰', color: '#ffa8ba', isBold: true, size: 23 },
+      { text: 'Love You 3000 💘', color: '#ffd166', isBold: true, size: 23 },
+      { text: 'Yêu tys nhất quả đất 👑', color: '#ff3377', isBold: true, size: 24 },
+      { text: 'Tuổi mới rạng rỡ ✨', color: '#ffd166', isBold: true, size: 22 },
+      { text: 'Vạn điều như ý 🌸', color: '#ffffff', isBold: true, size: 22 },
+      { text: 'Bình yên bên em ☁️', color: '#ffa8ba', isBold: false, size: 21 },
+      { text: 'Cậu bé tháng 10 🍂', color: '#ffccd7', isBold: false, size: 21 },
+      { text: 'Forever With You 💍', color: '#ffd166', isBold: true, size: 23 },
+      { text: 'Cục cưng của anh 😘', color: '#ff4d88', isBold: true, size: 23 },
+      { text: 'My Sunshine ☀️', color: '#ffd166', isBold: true, size: 22 },
+      { text: 'Hạnh phúc ngập tràn 🌈', color: '#ffffff', isBold: false, size: 21 },
+      { text: 'Bên nhau trọn đời 🤍', color: '#ffa8ba', isBold: true, size: 22 }
+    ];
+
+    // Tạo các cached sprites một lần duy nhất
+    let cachedSprites = [];
+    function initSprites() {
+      if (cachedSprites.length > 0) return;
+      
+      // Text sprites
+      rawWordDefinitions.forEach(w => {
+        cachedSprites.push({
+          type: 'text',
+          sprite: createTextSprite(w.text, w.color, w.isBold, w.size)
+        });
+      });
+
+      // Red Hearts
+      const heartSprite = createHeartSprite(34);
+      for (let i = 0; i < 24; i++) {
+        cachedSprites.push({ type: 'heart', sprite: heartSprite });
+      }
+
+      // Neon Stars
+      const starSprite = createStarSprite(28);
+      for (let i = 0; i < 18; i++) {
+        cachedSprites.push({ type: 'star', sprite: starSprite });
+      }
+
+      // Neon Moons
+      const moonSprite = createMoonSprite(30);
+      for (let i = 0; i < 12; i++) {
+        cachedSprites.push({ type: 'moon', sprite: moonSprite });
+      }
+    }
+
+    // Khởi tạo 3D Universe Particles trên mặt cầu đa chiều (Được phân bố cao hơn lên nửa trên)
+    let universe3DParticles = [];
+    function init3DUniverse() {
+      initSprites();
+      universe3DParticles = [];
+      const total = cachedSprites.length;
+
+      // Phân bố đều các điểm trên mặt cầu (Golden Spiral Sphere)
+      const phiRatio = (1 + Math.sqrt(5)) / 2;
+      for (let i = 0; i < total; i++) {
+        const item = cachedSprites[i];
+        
+        // Golden spiral on sphere
+        const theta = 2 * Math.PI * i / phiRatio;
+        const yNorm = 1 - (i / (total - 1)) * 2; // -1 (trên) đến 1 (dưới)
+        const radiusXZ = Math.sqrt(Math.max(0, 1 - yNorm * yNorm));
+        
+        // Bán kính không gian 3D
+        const radius = Math.random() * 100 + 320; // 320px ~ 420px (vừa vặn màn hình điện thoại)
+
+        const x = Math.cos(theta) * radiusXZ * radius;
+        // Dịch chuyển tâm Y lên trên (trong Canvas 2D, Y âm là hướng lên trên)
+        const y = (yNorm - 0.22) * (radius * 0.75);
+        const z = Math.sin(theta) * radiusXZ * radius;
+
+        universe3DParticles.push({
+          x: x,
+          y: y,
+          z: z,
+          spriteData: item.sprite,
+          baseScale: item.type === 'heart' ? (Math.random() * 0.35 + 0.85) : 1,
+          rotX: 0,
+          rotY: 0,
+          rotZ: 0
+        });
+      }
+    }
+
+    // Animation & Smooth Auto-Rotation Variables
+    let autoAngleY = 0;
+    let universeTime = 0;
+    let dragAngleX = 0, dragAngleY = 0;
+    let targetDragX = 0, targetDragY = 0;
+    let isTouching = false;
+    let touchStartX = 0, touchStartY = 0;
+
+    // Multi-angle 60 FPS Render Loop (Không lag, trọng tâm ở nửa trên màn hình)
+    function render3DUniverseLoop() {
+      if (!isWishesActive) return;
+      wishesAnimId = requestAnimationFrame(render3DUniverseLoop);
+
+      universeTime += 0.016;
+      autoAngleY += 0.0035; // Tự động quay góc 360 độ từ tốn, mượt mà
+
+      // Smooth damping cho cử chỉ vuốt nếu người dùng chạm nhẹ
+      dragAngleX += (targetDragX - dragAngleX) * 0.08;
+      dragAngleY += (targetDragY - dragAngleY) * 0.08;
+
+      // Góc quay tổng hợp: Tự động đổi góc từ trên xuống dưới
+      const currentRotY = autoAngleY + dragAngleY;
+      const currentRotX = Math.sin(universeTime * 0.45) * 0.16 - 0.10 + dragAngleX; // Nghiêng nhẹ góc nhìn hướng lên
+      const currentRotZ = Math.cos(universeTime * 0.35) * 0.05; // Nghiêng nhẹ máy quay
+
+      wishesCtx.clearRect(0, 0, wW, wH);
+
+      const centerX = wW / 2;
+      // Nâng trọng tâm camera lên vị trí 40% chiều cao màn hình (trên cùng)
+      const centerY = wH * 0.42;
+      const focalLength = 430;
+      const zCameraOffset = 500;
+
+      // Tính toán vị trí ma trận 3D chiếu về 2D Screen
+      const cosY = Math.cos(currentRotY), sinY = Math.sin(currentRotY);
+      const cosX = Math.cos(currentRotX), sinX = Math.sin(currentRotX);
+      const cosZ = Math.cos(currentRotZ), sinZ = Math.sin(currentRotZ);
+
+      const projected = [];
+
+      for (let i = 0; i < universe3DParticles.length; i++) {
+        const p = universe3DParticles[i];
+
+        // 1. Xoay quanh trục Y
+        const x1 = p.x * cosY + p.z * sinY;
+        const z1 = -p.x * sinY + p.z * cosY;
+
+        // 2. Xoay quanh trục X
+        const y2 = p.y * cosX - z1 * sinX;
+        const z2 = p.y * sinX + z1 * cosX;
+
+        // 3. Xoay quanh trục Z
+        const x3 = x1 * cosZ - y2 * sinZ;
+        const y3 = x1 * sinZ + y2 * cosZ;
+        const z3 = z2;
+
+        const realZ = z3 + zCameraOffset;
+        if (realZ <= 10) continue; // Nằm sau lưng camera
+
+        const scale = focalLength / realZ;
+        const screenX = centerX + x3 * scale;
+        const screenY = centerY + y3 * scale;
+
+        // Tính toán độ mờ & kích thước theo chiều sâu (Z-index ảo)
+        const alpha = Math.min(1, Math.max(0.15, (scale * 1.1) - 0.1));
+
+        projected.push({
+          sprite: p.spriteData,
+          x: screenX,
+          y: screenY,
+          scale: scale * p.baseScale,
+          alpha: alpha,
+          depthZ: realZ
+        });
+      }
+
+      // Sắp xếp theo chiều sâu (Vẽ từ xa đến gần)
+      projected.sort((a, b) => b.depthZ - a.depthZ);
+
+      // Vẽ siêu tốc qua Hardware drawImage (Zero CPU overhead)
+      for (let i = 0; i < projected.length; i++) {
+        const item = projected[i];
+        const sp = item.sprite;
+        const drawW = sp.width * item.scale;
+        const drawH = sp.height * item.scale;
+
+        wishesCtx.globalAlpha = item.alpha;
+        wishesCtx.drawImage(
+          sp.canvas,
+          item.x - drawW / 2,
+          item.y - drawH / 2,
+          drawW,
+          drawH
+        );
+      }
+      wishesCtx.globalAlpha = 1.0;
+    }
+
+    // Touch & Pointer Drag Listeners cho Màn 3
+    if (wishesCanvas) {
+      wishesCanvas.addEventListener('pointerdown', (e) => {
+        isTouching = true;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+      });
+
+      window.addEventListener('pointermove', (e) => {
+        if (!isTouching || !isWishesActive) return;
+        const dx = e.clientX - touchStartX;
+        const dy = e.clientY - touchStartY;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+
+        targetDragY += dx * 0.005;
+        targetDragX -= dy * 0.005;
+        targetDragX = Math.max(-0.6, Math.min(0.6, targetDragX));
+      });
+
+      window.addEventListener('pointerup', () => {
+        isTouching = false;
+      });
+      window.addEventListener('pointercancel', () => {
+        isTouching = false;
+      });
+    }
+
+    function openWishesScreen() {
+      if (!wishesScreen) return;
+      isWishesActive = true;
+      wishesScreen.classList.add('show');
+      resizeWishesCanvas();
+      init3DUniverse();
+      triggerCakeConfetti();
+
+      if (wishesAnimId) cancelAnimationFrame(wishesAnimId);
+      render3DUniverseLoop();
+    }
+
+    function closeWishesScreen() {
+      if (!wishesScreen) return;
+      isWishesActive = false;
+      wishesScreen.classList.remove('show');
+      if (wishesAnimId) {
+        cancelAnimationFrame(wishesAnimId);
+        wishesAnimId = null;
+      }
+    }
+
+  </script>
+</body>
+</html>
