@@ -1745,50 +1745,82 @@ Cảm ơn em vì đã luôn ấm áp, đáng yêu và mang đến cho anh thật
     let hasSetStart = false;
 
     function ensureSecond30() {
-      if (!hasSetStart) {
+      if (!hasSetStart && bgm) {
         try {
-          bgm.currentTime = 30;
-          hasSetStart = true;
+          if (bgm.duration && bgm.duration > 30) {
+            bgm.currentTime = 30;
+            hasSetStart = true;
+          } else if (bgm.readyState >= 1) {
+            bgm.currentTime = 30;
+            hasSetStart = true;
+          }
         } catch (e) {
           console.log("Setting currentTime error", e);
         }
       }
     }
 
-    bgm.addEventListener('loadedmetadata', ensureSecond30);
-    bgm.addEventListener('canplay', ensureSecond30);
-
-    function playAudio() {
-      ensureSecond30();
-      bgm.play().then(() => {
+    if (bgm) {
+      bgm.addEventListener('loadedmetadata', ensureSecond30);
+      bgm.addEventListener('canplay', ensureSecond30);
+      bgm.addEventListener('play', () => {
         isPlaying = true;
-        musicToggle.classList.add('playing');
-        musicToggle.textContent = '🎵';
-      }).catch(err => {
-        console.log("Audio autoplay prevented, waiting for user gesture.", err);
+        if (musicToggle) {
+          musicToggle.classList.add('playing');
+          musicToggle.textContent = '🎵';
+        }
+      });
+      bgm.addEventListener('pause', () => {
+        isPlaying = false;
+        if (musicToggle) {
+          musicToggle.classList.remove('playing');
+          musicToggle.textContent = '🔇';
+        }
       });
     }
 
-    musicToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (isPlaying) {
-        bgm.pause();
-        musicToggle.classList.remove('playing');
-        musicToggle.textContent = '🔇';
-        isPlaying = false;
-      } else {
-        playAudio();
+    function playAudio() {
+      if (!bgm) return;
+      ensureSecond30();
+      const playPromise = bgm.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          if (musicToggle) {
+            musicToggle.classList.add('playing');
+            musicToggle.textContent = '🎵';
+          }
+          ensureSecond30();
+        }).catch(err => {
+          console.log("Audio autoplay prevented, waiting for user gesture.", err);
+          isPlaying = false;
+          if (musicToggle) {
+            musicToggle.classList.remove('playing');
+            musicToggle.textContent = '🔇';
+          }
+        });
       }
-    });
+    }
+
+    if (musicToggle) {
+      musicToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isPlaying) {
+          bgm.pause();
+        } else {
+          playAudio();
+        }
+      });
+    }
 
     // --- ONE-WAY CRYPTOGRAPHIC SHA-256 HASH VERIFICATION ---
     // Mã băm SHA-256 1 chiều an toàn, không thể dịch ngược thành chuỗi gốc
     const SECRET_HASH = '7dcb1bcf3b894b54b9c8ed40f2fa056debdf67095c1d4bc895ba611529dac4cf';
 
     async function hashString(str) {
-      if (window.crypto && crypto.subtle) {
+      if (window.crypto && window.crypto.subtle) {
         const msgBuffer = new TextEncoder().encode(str);
-        const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+        const hashBuffer = await window.crypto.subtle.digest('SHA-256', msgBuffer);
         return Array.from(new Uint8Array(hashBuffer))
           .map(b => b.toString(16).padStart(2, '0'))
           .join('');
@@ -1892,14 +1924,16 @@ Cảm ơn em vì đã luôn ấm áp, đáng yêu và mang đến cho anh thật
     });
 
     // --- START EXPERIENCE ON BUTTON CLICK ---
+    let isGiftOpened = false;
+
     function startExperience() {
       const intro = document.getElementById('intro-screen');
       const main = document.getElementById('main-content');
 
-      intro.classList.add('hide');
-      main.classList.add('show');
+      if (intro) intro.classList.add('hide');
+      if (main) main.classList.add('show');
 
-      // Kích hoạt dòng chữ & trái tim bay liên tục khắp màn hình
+      // Kích hoạt trạng thái mở quà
       isGiftOpened = true;
 
       // Bắt đầu phát nhạc từ giây 30
@@ -1929,8 +1963,11 @@ Cảm ơn em vì đã luôn ấm áp, đáng yêu và mang đến cho anh thật
       }, 1200);
     }
 
-    // --- GLOBAL TOUCH HEART BURST ---
+    // --- GLOBAL TOUCH HEART BURST & AUDIO RESUME FALLBACK ---
     window.addEventListener('pointerdown', (e) => {
+      if (isGiftOpened && !isPlaying && bgm && bgm.paused) {
+        playAudio();
+      }
       // Don't trigger if clicked on controls or modal
       if (e.target.closest('#music-toggle') || e.target.closest('.btn-open') || e.target.closest('.btn-close-wishes') || e.target.closest('#password-modal')) return;
       createTouchParticle(e.clientX, e.clientY);
